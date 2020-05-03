@@ -3,7 +3,7 @@
 First homework for Information Visualization (http://www.dia.uniroma3.it/~infovis/) course held at the "Roma Tre" University by professor Maurizio Patrignani (http://www.dia.uniroma3.it/~compunet/www/view/person.php?id=titto) in the academic year 2019-2020.
 
 ## Author
-Daniele Santino - [danielesantino96@gmail.com](mailto:danielesantino96@gmail.com), [dan.santino@stud.uniroma3.it](dan.santino@stud.uniroma3.it)
+Daniele Santino - [danielesantino96@gmail.com](mailto:danielesantino96@gmail.com), [dan.santino@stud.uniroma3.it](dan.santino@stud.uniroma3.it) (https://santinodaniele.github.io)
 
 ## Goal of The Project (In Italian and English)
 IT: "Crea un file json con dei dati trivariati: ci sono 10 data case e ogni
@@ -25,3 +25,6 @@ circles of bubble chart. By clicking on a Cartesian axis the variables yes
 swap role: the axis variable is used for the spokes
 and the variable for the radii is used for that axis. Make sure
 that the transformations are continuous and not in leaps."
+
+## Version of d3.js used
+The version of d3.js used is 5.16.0, the most recent to date. (https://d3js.org)
