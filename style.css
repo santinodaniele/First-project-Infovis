@@ -60,6 +60,10 @@ h3 {
     font-weight: 200;
     font-size: 13px;
 }
+.xAxis path {
+    stroke: black;
+}
 
-
-
+.yAxis path {
+    stroke: black;
+}
