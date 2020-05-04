@@ -14,13 +14,14 @@ var svg = d3.select("#mioGrafico")
 // Aggiungo l'asse delle X
 var x = d3.scaleLinear()
 	.domain([0, 100])
-	.range([ 0, width ]);
+	.range([ 0, width ])
 
 svg.append("g")
 	.attr("transform", "translate(0," + height + ")")
 	.attr("class","xAxis")
 	.call(d3.axisBottom(x).ticks(20))
 
+// Aggiungo del testo lungo gli assi
 svg.append("text")
 	.attr("text-anchor", "end")
 	.attr("x", width)
@@ -40,11 +41,12 @@ svg.append("text")
 var y = d3.scaleLinear()
 	.domain([0, 100])
 	.range([ height, 0]);
+
 svg.append("g")
 	.attr("class","yAxis")
 	.call(d3.axisLeft(y).ticks(20));
 
-// Creo una variabile che mi dice il nome della bolla quando ci passo sopara
+// Creo una variabile che mi dice il nome della bolla quando ci passo sopra
 var nomeBolla = d3.select("#mioGrafico")
 	.append("div")
 	.style("opacity", 0)
@@ -124,33 +126,34 @@ d3.json("data.json")
 			.on("mousemove", muoviNomeBolla)
 			.on("mouseleave", nascondiNomeBolla)
 
-		svg.selectAll('.tick')
-			.on('click', cliccami)
-
-		function cliccami(d) {
-			d3.selectAll("circle").transition().duration(2000).attr("r",d);
-
-			// Aggiorno i valori sugli assi
-			/*var newX = d3.scaleLinear()
-				.domain([0, d3.selectAll('circle').attr("r")])
-				.range([ 0, width ]);
-
-			svg.append("g")
-				.attr("transform", "translate(0," + height + ")")
-				.attr("class","xAxisNew")
-				.call(d3.axisBottom(newX).ticks(20))
 
 
+		// seleziono i tick dell'asse delle x e richiamo la funzione "cliccamiX"
+		// che attribuisce ai raggi il valore del tick e a cx il valore dei raggi
+		svg.selectAll(".xAxis .tick")
+			.on('click', cliccamiX)
 
-			// Aggiungo l'asse delle Y
-			var newY = d3.scaleLinear()
-				.domain([0, d3.selectAll('circle').attr("r")])
-				.range([ height, 0]);
-			svg.append("g")
-				.attr("class","yAxisNew")
-				.call(d3.axisLeft(newY).ticks(20));*/
+		// seleziono i tick dell'asse delle y e richiamo la funzione "cliccamiY"
+		// che attribuisce ai raggi il valore del tick e a cy il valore dei raggi
+		svg.selectAll(".yAxis .tick")
+			.on('click', cliccamiY)
 
+		function cliccamiX(d) {
+			d3.selectAll("circle")
+				.transition()
+				.duration(2000)
+				.attr("r",d)
+				.attr("cx", function (d) {return d.r;})
+				.attr("cy", function (d) {return d.y;});
+		}
 
+		function cliccamiY(d) {
+			d3.selectAll("circle")
+				.transition()
+				.duration(2000)
+				.attr("r",d)
+				.attr("cx", function (d) {return d.x;})
+				.attr("cy", function (d) {return d.r;});
 		}
 	})
 
