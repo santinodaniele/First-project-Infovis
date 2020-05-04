@@ -3,7 +3,7 @@
 First project for Information Visualization (http://www.dia.uniroma3.it/~infovis/) course held at the "Roma Tre" University by professor Maurizio Patrignani (http://www.dia.uniroma3.it/~compunet/www/view/person.php?id=titto) in the academic year 2019-2020.
 
 ## Author
-Daniele Santino (https://santinodaniele.github.io) - [danielesantino96@gmail.com](mailto:danielesantino96@gmail.com), [dan.santino@stud.uniroma3.it](dan.santino@stud.uniroma3.it) 
+Daniele Santino (https://santinodaniele.github.io) - [dan.santino@stud.uniroma3.it](dan.santino@stud.uniroma3.it) 
 
 ## Goal of The Project (In Italian and English)
 IT: "Crea un file json con dei dati trivariati: ci sono 10 data case e ogni
@@ -26,7 +26,7 @@ swap role: the axis variable is used for the spokes
 and the variable for the radii is used for that axis. Make sure
 that the transformations are continuous and not in leaps."
 
-## Starting the application
+## How to start the application
 Python must be installed.
 
 With a Linux terminal, use the prompt to navigate to the folder containing the index.html file and type: <i><b>'python -m SimpleHTTPServer [porta]'</b></i>.
