@@ -26,5 +26,13 @@ swap role: the axis variable is used for the spokes
 and the variable for the radii is used for that axis. Make sure
 that the transformations are continuous and not in leaps."
 
+## Starting the application
+Python must be installed.
+
+With a Linux terminal, use the prompt to navigate to the folder containing the index.html file and type: <i><b>'python -m SimpleHTTPServer [porta]'</b></i>.
+
+With a Windows terminal, use the prompt to navigate to the folder containing the index.html file and type: <i><b>'python -m SimpleHTTPServer [porta]'</b></i>.
+
+
 ## Version of d3.js used
 The version of d3.js used is 5.16.0, the most recent to date. (https://d3js.org)
