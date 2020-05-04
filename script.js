@@ -13,38 +13,40 @@ var svg = d3.select("#mioGrafico")
 
 // Aggiungo l'asse delle X
 var x = d3.scaleLinear()
-	.domain([0, 100])
+	.domain([0, 12])
 	.range([ 0, width ])
 
 svg.append("g")
 	.attr("transform", "translate(0," + height + ")")
+	.attr("color", "green")
 	.attr("class","xAxis")
-	.call(d3.axisBottom(x).ticks(20))
+	.call(d3.axisBottom(x).ticks(24).tickSize(-550))
 
 // Aggiungo del testo lungo gli assi
 svg.append("text")
 	.attr("text-anchor", "end")
 	.attr("x", width)
 	.attr("y", height + margin.top + 20)
-	.text("X")
-	.attr("fill","black");
+	.text("Clicca sui valori dell'asse X per cambiare visualizzazione")
+	.attr("fill","darkred");
 
 svg.append("text")
 	.attr("text-anchor", "end")
 	.attr("transform", "rotate(-90)")
 	.attr("y", -margin.left+60)
 	.attr("x", -margin.top+40)
-	.text("Y")
-	.attr("fill","black");
+	.text("Clicca sui valori dell'asse Y per cambiare visualizzazione")
+	.attr("fill","darkred");
 
 // Aggiungo l'asse delle Y
 var y = d3.scaleLinear()
-	.domain([0, 100])
+	.domain([0, 30])
 	.range([ height, 0]);
 
 svg.append("g")
 	.attr("class","yAxis")
-	.call(d3.axisLeft(y).ticks(20));
+	.attr("color", "darkgreen")
+	.call(d3.axisLeft(y).ticks(20).tickSize(-860));
 
 // Creo una variabile che mi dice il nome della bolla quando ci passo sopra
 var nomeBolla = d3.select("#mioGrafico")
@@ -76,6 +78,28 @@ var nascondiNomeBolla = function(d) {
 		.duration(200)
 		.style("opacity", 0)
 }
+
+// Creo una legenda
+svg.append("rect").attr("x",880).attr("y",130).attr("width", 10).attr("height",10).style("fill", "red")
+svg.append("rect").attr("x",880).attr("y",160).attr("width", 10).attr("height",10).style("fill", "yellow")
+svg.append("text").attr("x", 890).attr("y", 130).text("1").style("font-size", "8px").attr("alignment-baseline","middle")
+svg.append("text").attr("x", 890).attr("y", 160).text("2").style("font-size", "8px").attr("alignment-baseline","middle")
+svg.append("rect").attr("x",880).attr("y",190).attr("width", 10).attr("height",10).style("fill", "green")
+svg.append("rect").attr("x",880).attr("y",220).attr("width", 10).attr("height",10).style("fill", "blue")
+svg.append("text").attr("x", 890).attr("y", 190).text("3").style("font-size", "8px").attr("alignment-baseline","middle")
+svg.append("text").attr("x", 890).attr("y", 220).text("4").style("font-size", "8px").attr("alignment-baseline","middle")
+svg.append("rect").attr("x",880).attr("y",250).attr("width", 10).attr("height",10).style("fill", "pink")
+svg.append("rect").attr("x",880).attr("y",280).attr("width", 10).attr("height",10).style("fill", "purple")
+svg.append("text").attr("x", 890).attr("y", 250).text("5").style("font-size", "8px").attr("alignment-baseline","middle")
+svg.append("text").attr("x", 890).attr("y", 280).text("6").style("font-size", "8px").attr("alignment-baseline","middle")
+svg.append("rect").attr("x",880).attr("y",310).attr("width", 10).attr("height",10).style("fill", "orange")
+svg.append("rect").attr("x",880).attr("y",330).attr("width", 10).attr("height",10).style("fill", "gray")
+svg.append("text").attr("x", 890).attr("y", 310).text("7").style("font-size", "8px").attr("alignment-baseline","middle")
+svg.append("text").attr("x", 890).attr("y", 330).text("8").style("font-size", "8px").attr("alignment-baseline","middle")
+svg.append("rect").attr("x",880).attr("y",360).attr("width", 10).attr("height",10).style("fill", "brown")
+svg.append("rect").attr("x",880).attr("y",390).attr("width", 10).attr("height",10).style("fill", "white")
+svg.append("text").attr("x", 890).attr("y", 360).text("9").style("font-size", "8px").attr("alignment-baseline","middle")
+svg.append("text").attr("x", 890).attr("y", 390).text("10").style("font-size", "8px").attr("alignment-baseline","middle")
 
 //Carico i dati dal file json
 d3.json("data.json")
