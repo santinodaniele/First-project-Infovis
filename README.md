@@ -3,7 +3,7 @@
 First project for Information Visualization (http://www.dia.uniroma3.it/~infovis/) course held at the "Roma Tre" University by professor Maurizio Patrignani (http://www.dia.uniroma3.it/~compunet/www/view/person.php?id=titto) in the academic year 2019-2020.
 
 ## Author
-Daniele Santino (https://santinodaniele.github.io) - [dan.santino@stud.uniroma3.it](mailto:dan.santino@stud.uniroma3.it) 
+Daniele Santino, serial number: 496958 (https://santinodaniele.github.io) - [dan.santino@stud.uniroma3.it](mailto:dan.santino@stud.uniroma3.it) 
 
 ## Goal of The Project (In Italian and English)
 IT: "Crea un file json con dei dati trivariati: ci sono 10 data case e ogni
@@ -34,5 +34,6 @@ With a Linux terminal, use the prompt to navigate to the folder containing the i
 With a Windows terminal, use the prompt to navigate to the folder containing the index.html file and type: <i><b>'python -m SimpleHTTPServer [porta]'</b></i>.
 
 
-## Version of d3.js used
+## Version of d3.js used, editor and test
 The version of d3.js used is 5.16.0, the most recent to date. (https://d3js.org)
+The project was carried out using WebStorm and the application was tested on Safari and Google Chrome.
