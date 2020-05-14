@@ -5,78 +5,78 @@ var	height = 600 - margin.top - margin.bottom;
 
 // Appendo l'oggetto svg al body della mia pagina
 var svg = d3.select("#mioGrafico")
-	.append("svg")
-	.attr("width", width + margin.left + margin.right)
-	.attr("height", height + margin.top + margin.bottom)
-	.append("g")
-	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 // Aggiungo l'asse delle X
 var x = d3.scaleLinear()
-	.domain([0, 24])
-	.range([ 0, width ])
+    .domain([0, 30])
+    .range([ 0, width ])
 
 svg.append("g")
-	.attr("transform", "translate(0," + height + ")")
-	.attr("color", "green")
-	.attr("class","xAxis")
-	.call(d3.axisBottom(x).ticks(24).tickSize(-550))
+    .attr("transform", "translate(0," + height + ")")
+    .attr("color", "green")
+    .attr("class","xAxis")
+    .call(d3.axisBottom(x).ticks(24).tickSize(-550))
 
 // Aggiungo l'asse delle Y
 var y = d3.scaleLinear()
-	.domain([0, 30])
-	.range([ height, 0]);
+    .domain([0, 30])
+    .range([ height, 0]);
 
 svg.append("g")
-	.attr("class","yAxis")
-	.attr("color", "darkgreen")
-	.call(d3.axisLeft(y).ticks(20).tickSize(-860));
+    .attr("class","yAxis")
+    .attr("color", "darkgreen")
+    .call(d3.axisLeft(y).ticks(20).tickSize(-860));
 
 // Aggiungo del testo lungo gli assi
 svg.append("text")
-	.attr("text-anchor", "end")
-	.attr("x", width)
-	.attr("y", height + margin.top + 20)
-	.text("Clicca sui valori dell'asse X per cambiare visualizzazione")
-	.attr("fill","darkred");
+    .attr("text-anchor", "end")
+    .attr("x", width)
+    .attr("y", height + margin.top + 20)
+    .text("Clicca sui valori dell'asse X per cambiare visualizzazione")
+    .attr("fill","darkred");
 
 svg.append("text")
-	.attr("text-anchor", "end")
-	.attr("transform", "rotate(-90)")
-	.attr("y", -margin.left+60)
-	.attr("x", -margin.top+40)
-	.text("Clicca sui valori dell'asse Y per cambiare visualizzazione")
-	.attr("fill","darkred");
+    .attr("text-anchor", "end")
+    .attr("transform", "rotate(-90)")
+    .attr("y", -margin.left+60)
+    .attr("x", -margin.top+40)
+    .text("Clicca sui valori dell'asse Y per cambiare visualizzazione")
+    .attr("fill","darkred");
 
 // Creo una variabile che mi dice il nome della bolla quando ci passo sopra
 var nomeBolla = d3.select("#mioGrafico")
-	.append("div")
-	.style("opacity", 0)
-	.attr("class", "nomeBolla")
-	.style("background-color", "gold")
-	.style("border-radius", "5px")
-	.style("padding", "10px")
-	.style("color", "darkred")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "nomeBolla")
+    .style("background-color", "gold")
+    .style("border-radius", "5px")
+    .style("padding", "10px")
+    .style("color", "darkred")
 
 var mostraNomeBolla = function(d) {
-	nomeBolla
-		.transition()
-		.duration(200)
-		.style("opacity", 1)
-		.text("Nome: " + d.Nome)
-		.style("left", (d3.mouse(this)[0]+30) + "px")
-		.style("top", (d3.mouse(this)[1]+30) + "px")
+    nomeBolla
+        .transition()
+        .duration(200)
+        .style("opacity", 1)
+        .text("Nome: " + d.Nome)
+        .style("left", (d3.mouse(this)[0]+30) + "px")
+        .style("top", (d3.mouse(this)[1]+30) + "px")
 }
 var muoviNomeBolla = function(d) {
-	nomeBolla
-		.style("left", (d3.mouse(this)[0]+30) + "px")
-		.style("top", (d3.mouse(this)[1]+30) + "px")
+    nomeBolla
+        .style("left", (d3.mouse(this)[0]+30) + "px")
+        .style("top", (d3.mouse(this)[1]+30) + "px")
 }
 var nascondiNomeBolla = function(d) {
-	nomeBolla
-		.transition()
-		.duration(200)
-		.style("opacity", 0)
+    nomeBolla
+        .transition()
+        .duration(200)
+        .style("opacity", 0)
 }
 
 // Creo una legenda
@@ -103,92 +103,89 @@ svg.append("text").attr("x", 890).attr("y", 390).text("10").style("font-size", "
 
 //Carico i dati dal file json
 d3.json("data.json")
-	.then(function(data) {
+    .then(function(data) {
 
-		// Aggiungo le bolle
-		svg.append('g')
-			.selectAll("dot")
-			.data(data)
-			.enter()
-			.append("circle")
-			.attr("cx", function (d) {
-				return d.x;
-			})
-			.attr("cy", function (d) {
-				return d.y;
-			})
-			.attr("r", function (d) {
-				return d.r;
-			})
-			.style("fill", function (d) {
-				if (d.Nome == "Bolla1") {
-					return "red"
-				} else if (d.Nome == "Bolla2") {
-					return "yellow"
-				} else if (d.Nome == "Bolla3") {
-					return "green"
-				} else if (d.Nome == "Bolla4") {
-					return "blue"
-				} else if (d.Nome == "Bolla5") {
-					return "pink"
-				} else if (d.Nome == "Bolla6") {
-					return "purple"
-				} else if (d.Nome == "Bolla7") {
-					return "orange"
-				} else if (d.Nome == "Bolla8") {
-					return "gray"
-				} else if (d.Nome == "Bolla9") {
-					return "brown"
-				} else if (d.Nome == "Bolla10") {
-					return "white"
-				}
-			})
-			.style("opacity", "0.7")
-			.attr("stroke", "black")
-			.attr("stroke-width", "4")
-			.on("mouseover", mostraNomeBolla)
-			.on("mousemove", muoviNomeBolla)
-			.on("mouseleave", nascondiNomeBolla)
+        // Aggiungo le bolle
+        svg.append('g')
+            .selectAll("dot")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("cx", function (d) {
+                return x(d.x);
+            })
+            .attr("cy", function (d) {
+                return y(d.y);
+            })
+            .attr("r", function (d) {
+                return d.r;
+            })
+            .style("fill", function (d) {
+                if (d.Nome == "Bolla1") {
+                    return "red"
+                } else if (d.Nome == "Bolla2") {
+                    return "yellow"
+                } else if (d.Nome == "Bolla3") {
+                    return "green"
+                } else if (d.Nome == "Bolla4") {
+                    return "blue"
+                } else if (d.Nome == "Bolla5") {
+                    return "pink"
+                } else if (d.Nome == "Bolla6") {
+                    return "purple"
+                } else if (d.Nome == "Bolla7") {
+                    return "orange"
+                } else if (d.Nome == "Bolla8") {
+                    return "gray"
+                } else if (d.Nome == "Bolla9") {
+                    return "brown"
+                } else if (d.Nome == "Bolla10") {
+                    return "white"
+                }
+            })
+            .style("opacity", "0.7")
+            .attr("stroke", "black")
+            .attr("stroke-width", "4")
+            .on("mouseover", mostraNomeBolla)
+            .on("mousemove", muoviNomeBolla)
+            .on("mouseleave", nascondiNomeBolla)
 
 
 
-		// seleziono i tick dell'asse delle x e richiamo la funzione "cliccamiX"
-		// che attribuisce ai raggi il valore del tick e a cx il valore dei raggi
-		svg.selectAll(".xAxis .tick")
-			.on('click', cliccamiX)
+        // seleziono i tick dell'asse delle x e richiamo la funzione "cliccamiX"
+        // che attribuisce ai raggi il valore del tick e a cx il valore dei raggi
+        svg.selectAll(".xAxis .tick")
+            .on('click', cliccamiX)
 
-		// seleziono i tick dell'asse delle y e richiamo la funzione "cliccamiY"
-		// che attribuisce ai raggi il valore del tick e a cy il valore dei raggi
-		svg.selectAll(".yAxis .tick")
-			.on('click', cliccamiY)
+        // seleziono i tick dell'asse delle y e richiamo la funzione "cliccamiY"
+        // che attribuisce ai raggi il valore del tick e a cy il valore dei raggi
+        svg.selectAll(".yAxis .tick")
+            .on('click', cliccamiY)
 
-		function cliccamiX() {
-			var linearScale = d3.scaleLinear()
-				.domain([0, 10])
-				.range([0, 1/10]);
-				d3.selectAll("circle")
-					.data(data)
-					.transition()
-					.duration(2000)
-					.attr("r", function (d) {return linearScale(d.x);})
-					.attr("cx", function (d) {return d.r;})
-					.attr("cy", function (d) {return d.y;});
-		}
+        function cliccamiX() {
+            console.log("fefe"+circles)
+            xAxisClicked();
+            d3.selectAll("circle")
+                .data(circles)
+                .transition()
+                .duration(2000)
+                .attr("r", function (d) {return d.r})
+                .attr("cx", function (d) {return x(d.x)})
+                .attr("cy", function (d) {return y(d.y)});
+        }
 
-		function cliccamiY() {
-			var linearScale = d3.scaleLinear()
-				.domain([0, 10])
-				.range([0, 1/10]);
-			d3.selectAll("circle")
-				.data(data)
-				.transition()
-				.duration(2000)
-				.attr("r", function (d) {return linearScale(d.y);})
-				.attr("cx", function (d) {return d.x;})
-				.attr("cy", function (d) {return d.r;});
-		}
-	})
+        function cliccamiY() {
+            yAxisClicked();
+            d3.selectAll("circle")
+                .data(circles)
+                .transition()
+                .duration(2000)
+                .attr("r", function (d) {return d.r;})
+                .attr("cx", function (d) {return x(d.x)})
+                .attr("cy", function (d) {return y(d.y)});
+        }
+    })
 
-	.catch(function(error) {
-		console.log(error); // Se ci sono errori mostrali qui
-	});
+    .catch(function(error) {
+        console.log(error); // Se ci sono errori mostrali qui
+    });
