@@ -13,7 +13,7 @@ var svg = d3.select("#mioGrafico")
 
 // Aggiungo l'asse delle X
 var x = d3.scaleLinear()
-	.domain([0, 12])
+	.domain([0, 24])
 	.range([ 0, width ])
 
 svg.append("g")
@@ -21,6 +21,16 @@ svg.append("g")
 	.attr("color", "green")
 	.attr("class","xAxis")
 	.call(d3.axisBottom(x).ticks(24).tickSize(-550))
+
+// Aggiungo l'asse delle Y
+var y = d3.scaleLinear()
+	.domain([0, 30])
+	.range([ height, 0]);
+
+svg.append("g")
+	.attr("class","yAxis")
+	.attr("color", "darkgreen")
+	.call(d3.axisLeft(y).ticks(20).tickSize(-860));
 
 // Aggiungo del testo lungo gli assi
 svg.append("text")
@@ -37,16 +47,6 @@ svg.append("text")
 	.attr("x", -margin.top+40)
 	.text("Clicca sui valori dell'asse Y per cambiare visualizzazione")
 	.attr("fill","darkred");
-
-// Aggiungo l'asse delle Y
-var y = d3.scaleLinear()
-	.domain([0, 30])
-	.range([ height, 0]);
-
-svg.append("g")
-	.attr("class","yAxis")
-	.attr("color", "darkgreen")
-	.call(d3.axisLeft(y).ticks(20).tickSize(-860));
 
 // Creo una variabile che mi dice il nome della bolla quando ci passo sopra
 var nomeBolla = d3.select("#mioGrafico")
@@ -162,20 +162,28 @@ d3.json("data.json")
 		svg.selectAll(".yAxis .tick")
 			.on('click', cliccamiY)
 
-		function cliccamiX(d) {
-			d3.selectAll("circle")
-				.transition()
-				.duration(2000)
-				.attr("r",d)
-				.attr("cx", function (d) {return d.r;})
-				.attr("cy", function (d) {return d.y;});
+		function cliccamiX() {
+			var linearScale = d3.scaleLinear()
+				.domain([0, 10])
+				.range([0, 1/10]);
+				d3.selectAll("circle")
+					.data(data)
+					.transition()
+					.duration(2000)
+					.attr("r", function (d) {return linearScale(d.x);})
+					.attr("cx", function (d) {return d.r;})
+					.attr("cy", function (d) {return d.y;});
 		}
 
-		function cliccamiY(d) {
+		function cliccamiY() {
+			var linearScale = d3.scaleLinear()
+				.domain([0, 10])
+				.range([0, 1/10]);
 			d3.selectAll("circle")
+				.data(data)
 				.transition()
 				.duration(2000)
-				.attr("r",d)
+				.attr("r", function (d) {return linearScale(d.y);})
 				.attr("cx", function (d) {return d.x;})
 				.attr("cy", function (d) {return d.r;});
 		}
