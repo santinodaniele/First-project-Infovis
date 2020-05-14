@@ -163,7 +163,6 @@ d3.json("data.json")
             .on('click', cliccamiY)
 
         function cliccamiX() {
-            console.log("fefe"+circles)
             xAxisClicked();
             d3.selectAll("circle")
                 .data(circles)
