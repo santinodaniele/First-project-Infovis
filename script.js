@@ -61,8 +61,8 @@ d3.json("data.json").then(function(data){
     var yAxisLabel = svg.append("text")
         .attr("text-anchor", "end")
         .attr("transform", "rotate(-90)")
-        .attr("y", -margin.left+20)
-        .attr("x", -margin.top)
+        .attr("y", -margin.left+50)
+        .attr("x", -margin.top + 30)
         .text("Clicca sui valori dell'asse Y per cambiare visualizzazione")
         .attr("fill","darkred");
 
@@ -91,7 +91,7 @@ d3.json("data.json").then(function(data){
              .transition()
              .duration(200)
              .style("opacity", 1)
-             .text("Nome: " + d.Nome)
+             .text("Nome: " + d.Nome + "\n"+ "X: " +d[laX] + "\n"+ "Y: " +d[laY]  + "\n"+ "Raggio: " +d[raggio])
              .style("left", (d3.mouse(this)[0]+30) + "px")
              .style("top", (d3.mouse(this)[1]+30) + "px")
      }
@@ -292,9 +292,9 @@ d3.json("data.json").then(function(data){
                 return "url(#uk)"
             }
         })
-        .style("opacity", "0.7")
+        .style("opacity", "1")
         .attr("stroke", "black")
-        .attr("stroke-width", "4")
+        .attr("stroke-width", "3")
         .on("mouseover", mostraNomeBolla)
         .on("mousemove", muoviNomeBolla)
         .on("mouseleave", nascondiNomeBolla)
