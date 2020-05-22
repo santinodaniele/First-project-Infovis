@@ -1,62 +1,70 @@
 [
   {
-    "Nome":"Bolla1",
+    "Nome":"Italia",
     "x":2,
     "y":30,
-    "r":15
+    "r":8000
   },
   {
-    "Nome":"Bolla2",
-    "x":4,
+  "Nome":"Spagna",
+  "x":40,
+  "y":30,
+  "r":100
+  },
+
+  {
+    "Nome":"Argentina",
+    "x":5,
     "y":20,
-    "r":10
+    "r":2
   },
+
   {
-  "Nome":"Bolla3",
-  "x":12,
-  "y":10,
-  "r":20
+    "Nome": "Brasile",
+    "x": 75,
+    "y": 32,
+    "r": 10
   },
+
   {
-    "Nome":"Bolla4",
-    "x":14,
-    "y":10,
-    "r":5
+    "Nome":"Canada",
+    "x":33,
+    "y":33,
+    "r":33
   },
+
   {
-    "Nome":"Bolla5",
-    "x":16,
-    "y":10,
-    "r":11
-  },
-  {
-    "Nome":"Bolla6",
+    "Nome":"Germania",
     "x":18,
-    "y":15,
-    "r":12
+    "y":27,
+    "r":90
   },
+
   {
-    "Nome":"Bolla7",
-    "x":20,
-    "y":25,
-    "r":16
+    "Nome":"Giappone",
+    "x":44,
+    "y":55,
+    "r":79
   },
+
   {
-    "Nome":"Bolla8",
-    "x":22,
+    "Nome":"Portogallo",
+    "x":62,
+    "y":71,
+    "r":56
+  },
+
+  {
+    "Nome":"Usa",
+    "x":55,
     "y":6,
-    "r":7
+    "r":67
   },
+
   {
-    "Nome":"Bolla9",
-    "x":24,
-    "y":14,
-    "r":8
-  },
-  {
-    "Nome":"Bolla10",
-    "x":28,
-    "y":16,
-    "r":10
+    "Nome":"UK",
+    "x":43,
+    "y":26,
+    "r":49
   }
 ]

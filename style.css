@@ -52,10 +52,10 @@ h3 {
 }
 .xAxis path {
     stroke: black;
-    stroke-width: 1.5;
+    stroke-width: 2;
 }
 
 .yAxis path {
     stroke: black;
-    stroke-width: 1.5;
+    stroke-width: 2;
 }
