@@ -19,6 +19,12 @@ d3.json("data.json").then(function(data){
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
+    //Aggiugno uno scale per il raggio
+    var r = d3.scaleLinear()
+        .domain([d3.min(data, function(d){return d["r"];}), d3.max(data, function (d) {
+            return d["r"];})])
+        .range([ 4, 50])
+
     // Aggiungo uno scale per l'asse delle x
     var x = d3.scaleLinear()
         .domain([0,d3.max(data, function (d) {
@@ -33,7 +39,7 @@ d3.json("data.json").then(function(data){
         .attr("transform", "translate(0," + height + ")")
         .attr("color", "darkgreen")
         .call(d3.axisBottom(x).ticks(24).tickSize(-550))
-        .on('click', updatePlot);
+        .on('click', aggiorna);
 
     //Aggiungo del testo lungo l'asse delle x
     var xAxisLabel = svg.append("text")
@@ -55,7 +61,7 @@ d3.json("data.json").then(function(data){
         .attr("class","yAxis")
         .attr("color", "darkgreen")
         .call(d3.axisLeft(y).ticks(20).tickSize(-860))
-        .on('click', updatePlot);
+        .on('click', aggiorna);
 
     // Aggiungo del testo lungo l'asse delle y
     var yAxisLabel = svg.append("text")
@@ -65,12 +71,6 @@ d3.json("data.json").then(function(data){
         .attr("x", -margin.top + 30)
         .text("Clicca sui valori dell'asse Y per cambiare visualizzazione")
         .attr("fill","darkred");
-
-    //Aggiugno uno scale per il raggio
-    var r = d3.scaleLinear()
-        .domain([d3.min(data, function(d){return d["r"];}), d3.max(data, function (d) {
-            return d["r"];})])
-        .range([ 10, 10])
 
     var div = d3.select("body").append("div")
         .attr("class", "tooltip")
@@ -300,21 +300,23 @@ d3.json("data.json").then(function(data){
         .on("mouseleave", nascondiNomeBolla)
 
     //Funzione che aggiorna il grafico e le bolle quando clicchi sugli assi
-    function updatePlot() {
+    function aggiorna() {
 
         target = this.id
 
         if (target === "asseDelleX"){
 
             //Aggiorno l'asse delle x
-            x.domain([0, d3.max(data, function (d) {
-                return d[raggio]})+50])
+            x.domain([d3.min(data, function (d) {return d[laX]-r(d[raggio]);}), d3.max(data, function (d) {return d[raggio]})+50])
             xAxis.transition()
                 .duration(1000)
                 .attr("color", "darkgreen")
                 .call(d3.axisBottom(x).ticks(24).tickSize(-550))
 
             xAxisLabel.text("Clicca sui valori dell'asse X per cambiare visualizzazione")
+
+            //Aggiorno il raggio
+            r.domain([d3.min(data, function (d) {return d[laX]}), d3.max(data, function (d) {return d[laX]})]);
 
             //Aggiorno il grafico
             svg.selectAll("circle")
@@ -332,14 +334,16 @@ d3.json("data.json").then(function(data){
         else
         {
             //Aggiorno l'asse delle y
-            y.domain([0,d3.max(data, function (d) {
-                return d[raggio]})+50])
+            y.domain([d3.min(data, function (d) {return d[laY]-r(d[raggio]);}),d3.max(data, function (d) {return d[raggio]})+50])
             yAxis.transition()
                 .duration(1000)
                 .attr("color", "darkgreen")
                 .call(d3.axisLeft(y).ticks(20).tickSize(-860))
 
             yAxisLabel.text("Clicca sui valori dell'asse Y per cambiare visualizzazione")
+
+            //Aggiorno il raggio
+            r.domain([d3.min(data, function (d) {return d[laY]}), d3.max(data, function (d) {return d[laY]})]);
 
             //Aggiorno il grafico
             svg.selectAll("circle")
